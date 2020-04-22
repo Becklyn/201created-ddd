@@ -1,7 +1,7 @@
 {
     "name": "201created/ddd",
     "description": "DDD framework used in 201Created projects",
-    "type": "library",
+    "type": "symfony-bundle",
     "license": "MIT",
     "version": "0.1.0",
     "authors": [

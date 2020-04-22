@@ -1,0 +1,84 @@
+services:
+    c201_ddd.events.event_type_repository:
+        class: C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventTypeRepository
+        public: false
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+
+    C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventTypeRepository:
+        alias: c201_ddd.events.event_type_repository
+
+    c201_ddd.events.aggregate_type_repository:
+        class: C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregateTypeRepository
+        public: false
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+
+    C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregateTypeRepository:
+        alias: c201_ddd.events.aggregate_type_repository
+
+    c201_ddd.events.aggregate_repository:
+        class: C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregateRepository
+        public: false
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+            - '@c201_ddd.events.aggregate_type_repository'
+
+    c201_ddd.events.event_store:
+        class: C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore
+        public: false
+        arguments:
+            - '@Doctrine\ORM\EntityManagerInterface'
+            - '@c201_ddd.events.aggregate_repository'
+            - '@c201_ddd.events.event_type_repository'
+            - '@Symfony\Component\Serializer\SerializerInterface'
+
+    C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore:
+        alias: c201_ddd.events.event_store
+
+    C201\Ddd\Events\Domain\EventStore:
+        alias: c201_ddd.events.event_store
+
+    c201_ddd.events.event_bus:
+        class: C201\Ddd\Events\Infrastructure\Bus\SimpleBus\SimpleBusEventBus
+        public: false
+        arguments:
+            - '@SimpleBus\SymfonyBridge\Bus\EventBus'
+
+    C201\Ddd\Events\Infrastructure\Bus\SimpleBus\SimpleBusEventBus:
+        alias: c201_ddd.events.event_bus
+
+    C201\Ddd\Events\Application\EventBus:
+        alias: c201_ddd.events.event_bus
+
+    c201_ddd.events.event_registry:
+        class: C201\Ddd\Events\Domain\EventRegistry
+        public: true
+        arguments:
+            - '@c201_ddd.events.event_store'
+
+    c201_ddd.events.event_manager:
+        class: C201\Ddd\Events\Application\EventManager
+        public: false
+        arguments:
+            - '@c201_ddd.events.event_registry'
+            - '@c201_ddd.events.event_bus'
+
+    c201_ddd.identity.aggregate_id_param_converter:
+        class: C201\Ddd\Identity\Infrastructure\Delivery\Web\Symfony\AggregateIdParamConverter
+        tags:
+            - { name: 'request.param_converter', converter: 'c201_ddd.identity.aggregate_id' }
+
+    c201_ddd.transactions.transaction_manager:
+        class: C201\Ddd\Transactions\Infrastructure\Application\Doctrine\DoctrineTransactionManager
+        public: true
+        arguments:
+            - '@Doctrine\Common\Persistence\ObjectManager'
+            - '@c201_ddd.events.event_manager'
+            - '@c201_ddd.events.event_store'
+
+    C201\Ddd\Transactions\Infrastructure\Application\Doctrine\DoctrineTransactionManager:
+        alias: c201_ddd.transactions.transaction_manager
+
+    C201\Ddd\Transactions\Application\TransactionManager:
+        alias: c201_ddd.transactions.transaction_manager
