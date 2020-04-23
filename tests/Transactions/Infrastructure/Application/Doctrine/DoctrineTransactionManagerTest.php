@@ -5,7 +5,7 @@ namespace C201\Ddd\Tests\Transactions\Infrastructure\Doctrine;
 use C201\Ddd\Events\Application\EventManager;
 use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore;
 use C201\Ddd\Transactions\Infrastructure\Application\Doctrine\DoctrineTransactionManager;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -15,7 +15,7 @@ class DoctrineTransactionManagerTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var ObjectProphecy|ObjectManager
+     * @var ObjectProphecy|EntityManagerInterface
      */
     private $entityManager;
 
@@ -36,7 +36,7 @@ class DoctrineTransactionManagerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->entityManager = $this->prophesize(ObjectManager::class);
+        $this->entityManager = $this->prophesize(EntityManagerInterface::class);
         $this->eventManager = $this->prophesize(EventManager::class);
         $this->eventStore = $this->prophesize(DoctrineEventStore::class);
         $this->fixture = new DoctrineTransactionManager($this->entityManager->reveal(), $this->eventManager->reveal(), $this->eventStore->reveal());

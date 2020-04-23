@@ -138,4 +138,10 @@ class DoctrineStoredEventAggregateTypeRepositoryTest extends TestCase
         $this->expectException(DoctrineStoredEventAggregateTypeNotFoundException::class);
         $this->fixture->findOne($event->aggregateType());
     }
+
+    public function testClearFreshlyCreated(): void
+    {
+        $this->fixture->clearFreshlyCreated();
+        $this->assertTrue(true);
+    }
 }

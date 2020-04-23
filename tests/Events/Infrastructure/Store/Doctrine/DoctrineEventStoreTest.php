@@ -63,7 +63,8 @@ class DoctrineEventStoreTest extends TestCase
             $this->em->reveal(),
             $this->aggregateRepository->reveal(),
             $this->eventTypeRepository->reveal(),
-            $this->serializer->reveal()
+            $this->serializer->reveal(),
+            true
         );
     }
 
@@ -99,5 +100,40 @@ class DoctrineEventStoreTest extends TestCase
         }))->shouldBeCalledTimes(1);
 
         $this->fixture->append($event);
+    }
+
+    public function testAppendDoesNothingIfStoreIsDisabled(): void
+    {
+        $this->fixture = new DoctrineEventStore(
+            $this->em->reveal(),
+            $this->aggregateRepository->reveal(),
+            $this->eventTypeRepository->reveal(),
+            $this->serializer->reveal(),
+            false
+        );
+
+        $this->em->persist(Argument::any())->shouldNotBeCalled();
+    }
+
+    public function testClearFreshlyCreatedClearsAggregateAndEventTypeRepositories(): void
+    {
+        $this->aggregateRepository->clearFreshlyCreated()->shouldBeCalled();
+        $this->eventTypeRepository->clearFreshlyCreated()->shouldBeCalled();
+        $this->fixture->clearFreshlyCreated();
+    }
+
+    public function testClearFreshlyCreatedDoesNotClearAggregateAndEventTypeRepositoriesIfStoreIsDisabled(): void
+    {
+        $this->fixture = new DoctrineEventStore(
+            $this->em->reveal(),
+            $this->aggregateRepository->reveal(),
+            $this->eventTypeRepository->reveal(),
+            $this->serializer->reveal(),
+            false
+        );
+
+        $this->aggregateRepository->clearFreshlyCreated()->shouldNotBeCalled();
+        $this->eventTypeRepository->clearFreshlyCreated()->shouldNotBeCalled();
+        $this->fixture->clearFreshlyCreated();
     }
 }

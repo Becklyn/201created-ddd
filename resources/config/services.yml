@@ -32,6 +32,7 @@ services:
             - '@c201_ddd.events.aggregate_repository'
             - '@c201_ddd.events.event_type_repository'
             - '@Symfony\Component\Serializer\SerializerInterface'
+            - true
 
     C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore:
         alias: c201_ddd.events.event_store
@@ -73,7 +74,7 @@ services:
         class: C201\Ddd\Transactions\Infrastructure\Application\Doctrine\DoctrineTransactionManager
         public: true
         arguments:
-            - '@Doctrine\Common\Persistence\ObjectManager'
+            - '@Doctrine\ORM\EntityManagerInterface'
             - '@c201_ddd.events.event_manager'
             - '@c201_ddd.events.event_store'
 

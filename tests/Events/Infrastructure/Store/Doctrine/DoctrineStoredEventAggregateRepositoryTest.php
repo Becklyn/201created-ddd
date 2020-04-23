@@ -133,4 +133,10 @@ class DoctrineStoredEventAggregateRepositoryTest extends TestCase
 
         $this->assertSame($aggregate, $this->fixture->findOneOrCreate($event));
     }
+
+    public function testClearFreshlyCreatedClearsAggregateTypeRepository(): void
+    {
+        $this->aggregateTypeRepository->clearFreshlyCreated()->shouldBeCalled();
+        $this->fixture->clearFreshlyCreated();
+    }
 }

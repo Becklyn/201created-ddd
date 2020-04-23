@@ -27,21 +27,29 @@ class DoctrineEventStore implements EventStore
 
     private SerializerInterface $serializer;
 
+    private bool $isEnabled;
+
     public function __construct(
         EntityManagerInterface $em,
         DoctrineStoredEventAggregateRepository $aggregateRepository,
         DoctrineStoredEventTypeRepository $eventTypeRepository,
-        SerializerInterface $serializer
+        SerializerInterface $serializer,
+        bool $isEnabled
     ) {
         $this->em = $em;
         $this->repository = $em->getRepository(DoctrineStoredEvent::class);
         $this->aggregateRepository = $aggregateRepository;
         $this->eventTypeRepository = $eventTypeRepository;
         $this->serializer = $serializer;
+        $this->isEnabled = $isEnabled;
     }
 
     public function append(DomainEvent $event): void
     {
+        if (!$this->isEnabled) {
+            return;
+        }
+
         $aggregate = $this->aggregateRepository->findOneOrCreate($event);
         $eventType = $this->eventTypeRepository->findOneOrCreate($event);
 
@@ -74,6 +82,10 @@ class DoctrineEventStore implements EventStore
 
     public function clearFreshlyCreated(): void
     {
+        if (!$this->isEnabled) {
+            return;
+        }
+
         $this->aggregateRepository->clearFreshlyCreated();
         $this->eventTypeRepository->clearFreshlyCreated();
     }

@@ -90,4 +90,10 @@ class DoctrineStoredEventTypeRepositoryTest extends TestCase
         $result = $this->fixture->findOneOrCreate($event);
         $this->assertEquals($result->name(), get_class($event));
     }
+
+    public function testClearFreshlyCreated(): void
+    {
+        $this->fixture->clearFreshlyCreated();
+        $this->assertTrue(true);
+    }
 }

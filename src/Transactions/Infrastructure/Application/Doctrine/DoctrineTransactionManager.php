@@ -5,7 +5,7 @@ namespace C201\Ddd\Transactions\Infrastructure\Application\Doctrine;
 use C201\Ddd\Transactions\Application\TransactionManager;
 use C201\Ddd\Events\Application\EventManager;
 use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @author Marko Vujnovic <mv@201created.de>
@@ -13,13 +13,13 @@ use Doctrine\Common\Persistence\ObjectManager;
  */
 class DoctrineTransactionManager implements TransactionManager
 {
-    private ObjectManager $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private EventManager $eventManager;
 
     private DoctrineEventStore $eventStore;
 
-    public function __construct(ObjectManager $entityManager, EventManager $eventManager, DoctrineEventStore  $eventStore)
+    public function __construct(EntityManagerInterface $entityManager, EventManager $eventManager, DoctrineEventStore  $eventStore)
     {
         $this->entityManager = $entityManager;
         $this->eventManager = $eventManager;
