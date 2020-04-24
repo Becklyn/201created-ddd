@@ -16,19 +16,10 @@ class C201DddBundle extends Bundle
     {
         parent::build($container);
 
-        $namespaces = ['C201\Ddd\Events\Infrastructure\Store\Doctrine'];
-        $directories = [realpath(__DIR__ . '/Events/Infrastructure/Store/Doctrine')];
-        $managerParameters = [];
-        $enabledParameter = false;
-        $aliasMap = [];
-        $container->addCompilerPass(
-            DoctrineOrmMappingsPass::createAnnotationMappingDriver(
-                $namespaces,
-                $directories,
-                $managerParameters,
-                $enabledParameter,
-                $aliasMap
-            )
-        );
+        $mappings = [
+            realpath(__DIR__ . '/../resources/config/doctrine-mapping') => 'C201\Ddd\Events\Infrastructure\Store\Doctrine',
+        ];
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings));
     }
 }
