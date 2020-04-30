@@ -24,6 +24,9 @@ services:
             - '@Doctrine\ORM\EntityManagerInterface'
             - '@c201_ddd.events.aggregate_type_repository'
 
+    C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregateRepository:
+        alias: c201_ddd.events.aggregate_repository
+
     c201_ddd.events.event_store:
         class: C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineEventStore
         public: false
@@ -58,12 +61,18 @@ services:
         arguments:
             - '@c201_ddd.events.event_store'
 
+    C201\Ddd\Events\Domain\EventRegistry:
+        alias: c201_ddd.events.event_registry
+
     c201_ddd.events.event_manager:
         class: C201\Ddd\Events\Application\EventManager
         public: false
         arguments:
             - '@c201_ddd.events.event_registry'
             - '@c201_ddd.events.event_bus'
+
+    C201\Ddd\Events\Application\EventManager:
+        alias: c201_ddd.events.event_manager
 
     c201_ddd.identity.aggregate_id_param_converter:
         class: C201\Ddd\Identity\Infrastructure\Delivery\Web\Symfony\AggregateIdParamConverter
