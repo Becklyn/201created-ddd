@@ -3,7 +3,7 @@
     "description": "DDD framework used in 201Created projects",
     "type": "symfony-bundle",
     "license": "MIT",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "authors": [
         {
             "name": "Christoph Hautzinger",
@@ -16,16 +16,16 @@
     ],
     "require": {
         "201created/collections": "^0.1",
-        "doctrine/doctrine-bundle": "^2.0",
-        "doctrine/orm": "^2.7",
+        "doctrine/doctrine-bundle": "^1.10||^2.0",
+        "doctrine/orm": "^2.6",
         "ramsey/uuid": "^4.0",
-        "sensio/framework-extra-bundle": "^5.5",
+        "sensio/framework-extra-bundle": "^5.0",
         "simple-bus/message-bus": "^3.0",
         "simple-bus/symfony-bridge": "^5.3",
-        "symfony/config": "^5.0",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/http-foundation": "^5.0",
-        "symfony/serializer": "^5.0",
+        "symfony/config": "^4.3||^5.0",
+        "symfony/dependency-injection": "^4.3||^5.0",
+        "symfony/http-foundation": "^4.3||^5.0",
+        "symfony/serializer": "^4.3||^5.0",
         "tightenco/collect": "^7.4",
         "webmozart/assert": "^1.7"
     },

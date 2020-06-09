@@ -34,9 +34,19 @@ trait DomainEventTestTrait
         return EventId::fromString(Uuid::uuid4());
     }
 
+    protected function angenommenEinEventId(): EventId
+    {
+        return $this->givenAnEventId();
+    }
+
     protected function givenARaisedTs(): \DateTimeImmutable
     {
         return new \DateTimeImmutable();
+    }
+
+    protected function angenommenEineRaisedTs(): \DateTimeImmutable
+    {
+        return $this->givenARaisedTs();
     }
 
     /**
