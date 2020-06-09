@@ -92,3 +92,15 @@ services:
 
     C201\Ddd\Transactions\Application\TransactionManager:
         alias: c201_ddd.transactions.transaction_manager
+
+    c201_ddd.commands.command_bus:
+        class: C201\Ddd\Commands\Infrastructure\SimpleBus\SimpleBusCommandBus
+        public: false
+        arguments:
+            - '@SimpleBus\SymfonyBridge\Bus\CommandBus'
+
+    C201\Ddd\Commands\Infrastructure\SimpleBus\SimpleBusCommandBus:
+        alias: c201_ddd.commands.command_bus
+
+    C201\Ddd\Commands\Application\CommandBus:
+        alias: c201_ddd.commands.command_bus
