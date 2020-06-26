@@ -1,6 +1,6 @@
 <?php
 
-namespace C201\Ddd\Tests\Commands\Application;
+namespace C201\Ddd\Commands\Application;
 
 use C201\Ddd\Commands\Application\CommandHandler;
 use C201\Ddd\Events\Domain\EventRegistry;
