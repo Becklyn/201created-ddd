@@ -13,7 +13,7 @@ use C201\Ddd\Transactions\Application\TransactionManager;
 abstract class CommandHandler
 {
     private TransactionManager $transactionManager;
-    private EventRegistry $eventRegistry;
+    protected EventRegistry $eventRegistry;
 
     /**
      * @required

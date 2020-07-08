@@ -3,7 +3,7 @@
     "description": "DDD framework used in 201Created projects",
     "type": "symfony-bundle",
     "license": "MIT",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "authors": [
         {
             "name": "Christoph Hautzinger",
