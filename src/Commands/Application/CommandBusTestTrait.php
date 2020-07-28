@@ -33,4 +33,9 @@ trait CommandBusTestTrait
     {
         $this->thenCommandBusShouldNotDispatch(Argument::any());
     }
+
+    protected function givenCommandBusThrowsExceptionWhenDispatching($command, \Exception $exception): void
+    {
+        $this->commandbus->dispatch($command)->willThrow($exception);
+    }
 }
