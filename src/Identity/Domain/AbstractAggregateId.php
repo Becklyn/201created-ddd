@@ -38,4 +38,9 @@ abstract class AbstractAggregateId implements AggregateId
     {
         return $this->id === $other->asString() && get_class($this) === get_class($other);
     }
+
+    public function aggregateType(): string
+    {
+        return substr(get_class($this), 0, -2);
+    }
 }

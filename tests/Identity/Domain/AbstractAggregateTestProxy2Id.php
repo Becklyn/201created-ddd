@@ -8,6 +8,6 @@ use C201\Ddd\Identity\Domain\AbstractAggregateId;
  * @author Marko Vujnovic <mv@201created.de>
  * @since  2020-04-06
  */
-class AbstractAggregateIdTestProxy2 extends AbstractAggregateId
+class AbstractAggregateTestProxy2Id extends AbstractAggregateId
 {
 }
