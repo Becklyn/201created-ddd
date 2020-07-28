@@ -11,4 +11,6 @@ interface AggregateId
     public function asString(): string;
 
     public function equals(AggregateId $other): bool;
+
+    public function aggregateType(): string;
 }
