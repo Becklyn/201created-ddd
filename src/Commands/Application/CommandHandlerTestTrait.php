@@ -3,8 +3,10 @@
 namespace C201\Ddd\Commands\Application;
 
 use C201\Ddd\Commands\Application\CommandHandler;
+use C201\Ddd\Events\Domain\DomainEventTestTrait;
 use C201\Ddd\Events\Domain\EventRegistry;
 use C201\Ddd\Transactions\Application\TransactionManager;
+use C201\Ddd\Transactions\Application\TransactionManagerTestTrait;
 
 /**
  * @author Marko Vujnovic <mv@201created.de>
@@ -12,6 +14,9 @@ use C201\Ddd\Transactions\Application\TransactionManager;
  */
 trait CommandHandlerTestTrait
 {
+    use TransactionManagerTestTrait;
+    use DomainEventTestTrait;
+
     /**
      * @var CommandHandler
      */
@@ -19,7 +24,7 @@ trait CommandHandlerTestTrait
 
     protected function commandHandlerPostSetUp()
     {
-        $this->fixture->setTransactionManager($this->prophesize(TransactionManager::class)->reveal());
-        $this->fixture->setEventRegistry($this->prophesize(EventRegistry::class)->reveal());
+        $this->fixture->setTransactionManager($this->transactionManager->reveal());
+        $this->fixture->setEventRegistry($this->eventRegistry->reveal());
     }
 }

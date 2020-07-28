@@ -93,4 +93,19 @@ trait DomainEventTestTrait
         $this->eventRegistry->dequeueProviderAndRegister($eventProvider)->willThrow($exception);
         return $exception;
     }
+
+    protected function thenEventRegistryShouldRegister($event): void
+    {
+        $this->eventRegistry->registerEvent($event)->shouldBeCalled();
+    }
+
+    protected function thenEventRegistryShouldNotRegister($event): void
+    {
+        $this->eventRegistry->registerEvent($event)->shouldNotBeCalled();
+    }
+
+    protected function thenEventRegistryShouldNotRegisterAnyEvents(): void
+    {
+        $this->thenEventRegistryShouldNotRegister(Argument::any());
+    }
 }
