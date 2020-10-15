@@ -4,7 +4,7 @@ namespace C201\Ddd\Events\Infrastructure\Store\Doctrine;
 
 use C201\Ddd\Events\Domain\DomainEvent;
 use Ramsey\Uuid\Uuid;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Tightenco\Collect\Support\Collection;
 

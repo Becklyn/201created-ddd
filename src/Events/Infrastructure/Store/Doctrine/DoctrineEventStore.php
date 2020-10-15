@@ -6,7 +6,7 @@ use C201\Ddd\Events\Domain\AggregateEventStream;
 use C201\Ddd\Events\Domain\DomainEvent;
 use C201\Ddd\Events\Domain\EventStore;
 use C201\Ddd\Identity\Domain\AggregateId;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Tightenco\Collect\Support\Collection;

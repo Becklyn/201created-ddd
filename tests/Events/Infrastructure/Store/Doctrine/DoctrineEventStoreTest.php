@@ -10,7 +10,7 @@ use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregate;
 use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventAggregateRepository;
 use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventType;
 use C201\Ddd\Events\Infrastructure\Store\Doctrine\DoctrineStoredEventTypeRepository;
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;

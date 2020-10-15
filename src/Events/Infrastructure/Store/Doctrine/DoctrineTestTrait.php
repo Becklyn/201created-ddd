@@ -2,7 +2,7 @@
 
 namespace C201\Ddd\Events\Infrastructure\Store\Doctrine;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Prophecy\Prophecy\ObjectProphecy;
 
